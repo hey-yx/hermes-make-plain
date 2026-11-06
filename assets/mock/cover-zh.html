@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1280px; height: 640px; overflow: hidden; }
+  body {
+    background: #1a1a1a;
+    color: #e9e9ea;
+    font-family: -apple-system, "SF Pro Text", "PingFang SC", "Helvetica Neue", sans-serif;
+    padding: 44px 56px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .title { font-size: 34px; font-weight: 700; letter-spacing: -0.3px; }
+  .title span { color: #9a9aa2; font-weight: 500; }
+  .sub { font-size: 17px; color: #9a9aa2; margin-top: -10px; }
+  .row { display: flex; gap: 20px; flex: 1; min-height: 0; }
+  .win {
+    background: #171818;
+    border: 1px solid #2b2b2d;
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden;
+  }
+  .win.left { flex: 5; }
+  .win.right { flex: 7; }
+  .cap { font-size: 13px; color: #8a8a92; text-transform: uppercase; letter-spacing: 1.2px; }
+  .bubble {
+    background: #272727;
+    border-radius: 12px;
+    padding: 13px 16px;
+    font-size: 15px;
+    line-height: 1.55;
+    color: #c9c9cf;
+  }
+  .goal { font-size: 16.5px; line-height: 1.55; color: #f0f0f2; font-weight: 600; }
+  .items { font-size: 14.5px; line-height: 1.8; color: #c9c9cf; }
+  .items li { list-style: none; padding-left: 16px; position: relative; }
+  .items li::before { content: "-"; position: absolute; left: 0; color: #8ab4ff; font-weight: 700; }
+  code {
+    font-family: "SF Mono", ui-monospace, monospace;
+    font-size: 13.5px;
+    background: #232326;
+    border-radius: 5px;
+    padding: 1px 6px;
+    color: #d8b46a;
+  }
+  .composer {
+    margin-top: auto;
+    background: #202022;
+    border: 1px solid #2e2e31;
+    border-radius: 12px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px 0 16px;
+    gap: 10px;
+  }
+  .composer .ph { color: #77777e; font-size: 15px; flex: 1; }
+  .btn {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: #2c2c30;
+    border: 1.5px solid #8ab4ff;
+    box-shadow: 0 0 0 4px rgba(138,180,255,0.18);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .btn svg { width: 19px; height: 19px; }
+  .btnlabel { font-size: 13px; color: #8ab4ff; white-space: nowrap; }
+</style>
+</head>
+<body>
+  <div>
+    <div class="title">Hermes MakePlain <span>· 一键把草稿变成 AI 能直接执行的要求</span></div>
+    <div class="sub">Hermes 桌面聊天的输入框按钮。语言跟着草稿走，细节一条不丢。</div>
+  </div>
+  <div class="row">
+    <div class="win left">
+      <div class="cap">输入框里的草稿</div>
+      <div class="bubble">就是那个迁移的事 我觉得还是等测试过了再说 然后 <code>@deploy.md</code> 里那个端口要改 8000 老被占 还有记得备份 另外登录有时候会卡住 也看看</div>
+      <div class="composer">
+        <div class="ph">随便写点草稿……</div>
+        <div class="btnlabel">点一下</div>
+        <div class="btn">
+          <svg viewBox="0 0 16 16" fill="none" stroke="#8ab4ff" stroke-width="1.5" stroke-linecap="round">
+            <path d="M2.5 13.5 9 7"/>
+            <path d="M11.5 2.5v2.4M10.3 3.7h2.4"/>
+            <path d="M13 8.4v1.8M12.1 9.3h1.8"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="win right">
+      <div class="cap">点一下之后，还留在输入框里</div>
+      <div class="goal">等测试通过再迁移，改掉 @deploy.md 里的端口，排查登录卡住的问题。</div>
+      <ul class="items"><li>测试通过之前不要执行迁移。</li><li><code>@deploy.md</code> 里的端口 8000 老被占用，要换掉。</li><li>迁移相关的改动记得先备份。</li><li>排查登录有时卡住的 bug。</li></ul>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+node_modules/
+__pycache__/
+*.log
+.DS_Store
+
+# working notes, not part of the published plugin
+user-input.md
+naming.json
