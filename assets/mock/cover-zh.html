@@ -39,7 +39,7 @@
     line-height: 1.55;
     color: #c9c9cf;
   }
-  .goal { font-size: 16.5px; line-height: 1.55; color: #f0f0f2; font-weight: 600; }
+  .prose { font-size: 15.5px; line-height: 1.85; color: #d4d4da; }
   .items { font-size: 14.5px; line-height: 1.8; color: #c9c9cf; }
   .items li { list-style: none; padding-left: 16px; position: relative; }
   .items li::before { content: "-"; position: absolute; left: 0; color: #8ab4ff; font-weight: 700; }
@@ -77,8 +77,8 @@
 </head>
 <body>
   <div>
-    <div class="title">Hermes MakePlain <span>· 一键把草稿变成 AI 能直接执行的要求</span></div>
-    <div class="sub">Hermes 桌面聊天的输入框按钮。语言跟着草稿走，细节一条不丢。</div>
+    <div class="title">Hermes MakePlain <span>· 一键把草稿整理得清清楚楚</span></div>
+    <div class="sub">Hermes 桌面聊天的输入框按钮。</div>
   </div>
   <div class="row">
     <div class="win left">
@@ -98,8 +98,7 @@
     </div>
     <div class="win right">
       <div class="cap">点一下之后，还留在输入框里</div>
-      <div class="goal">等测试通过再迁移，改掉 @deploy.md 里的端口，排查登录卡住的问题。</div>
-      <ul class="items"><li>测试通过之前不要执行迁移。</li><li><code>@deploy.md</code> 里的端口 8000 老被占用，要换掉。</li><li>迁移相关的改动记得先备份。</li><li>排查登录有时卡住的 bug。</li></ul>
+      <div class="prose">等测试通过再动手迁移。<code>@deploy.md</code> 里的端口 8000 老被占用，需要换掉。迁移要记得先做备份。另外登录有时候会卡住，这个问题也看一下。</div>
     </div>
   </div>
 </body>

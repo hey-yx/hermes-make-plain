@@ -39,7 +39,7 @@
     line-height: 1.55;
     color: #c9c9cf;
   }
-  .goal { font-size: 16.5px; line-height: 1.55; color: #f0f0f2; font-weight: 600; }
+  .prose { font-size: 15.5px; line-height: 1.85; color: #d4d4da; }
   .items { font-size: 14.5px; line-height: 1.8; color: #c9c9cf; }
   .items li { list-style: none; padding-left: 16px; position: relative; }
   .items li::before { content: "-"; position: absolute; left: 0; color: #8ab4ff; font-weight: 700; }
@@ -77,8 +77,8 @@
 </head>
 <body>
   <div>
-    <div class="title">Hermes MakePlain <span>· one click, draft becomes an AI-ready request</span></div>
-    <div class="sub">A composer button for the Hermes Desktop chat. The rewrite keeps your language and every detail.</div>
+    <div class="title">Hermes MakePlain <span>· one click, a draft that reads clearly</span></div>
+    <div class="sub">A composer button for the Hermes Desktop chat.</div>
   </div>
   <div class="row">
     <div class="win left">
@@ -98,8 +98,7 @@
     </div>
     <div class="win right">
       <div class="cap">After one click, still in the composer</div>
-      <div class="goal">Hold off on the migration, fix the port in @deploy.md, and investigate the login hang bug.</div>
-      <ul class="items"><li>Do not run the migration until the tests pass.</li><li>Change the port in <code>@deploy.md</code> from 8000 because it keeps getting taken.</li><li>Don't forget backups as part of the migration work.</li><li>Take a look at a bug where login hangs sometimes.</li></ul>
+      <div class="prose">Hold off on the migration until the tests pass. The port in <code>@deploy.md</code> needs changing because 8000 keeps getting taken. Backups are part of the work, and there is a login bug where it sometimes hangs.</div>
     </div>
   </div>
 </body>

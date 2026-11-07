@@ -3,22 +3,21 @@
 </p>
 
 <p align="center">
-  <img src="assets/cover-en.png" alt="Hermes MakePlain · one click, draft becomes an AI-ready request" width="100%">
+  <img src="assets/cover-en.png" alt="Hermes MakePlain · one click, a draft that reads clearly" width="100%">
 </p>
 
 <h1 align="center">Hermes MakePlain</h1>
 
 <p align="center">
-  <em>One click turns your rough draft into a message an AI can act on:
-  one goal line, then one request per line.</em>
+  <em>One click makes your rough draft easy to read:
+  same meaning, same language, nothing lost.</em>
 </p>
 
 ## What it does
 
 - Adds a wand button to the right of the chat input box in Hermes Desktop.
-- Click it to replace your rough draft in place with a clean, AI-ready rewrite. The message is not sent; the chat stays untouched.
-- The output format is made for AI agents.
-- The rewrite stays in the language you wrote in, and keeps every concrete detail exactly as written: names, numbers, versions, ports, paths, file names, URLs, `@`-references, `/`-commands and code.
+- Click it to replace your rough draft in place with a clean rewrite that reads clearly. The message is not sent; the chat stays untouched.
+- The rewrite keeps your original meaning, stays in the language you wrote in, and keeps every concrete detail exactly as written: names, numbers, versions, ports, paths, file names, URLs, `@`-references, `/`-commands and code.
 - You can see what it is doing: the button spins while the rewrite is in flight, and an empty box is rejected before any work starts.
 
 ## How it works

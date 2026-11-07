@@ -3,8 +3,8 @@
  *
  * One button in the composer actions row (right side of the input, next to the
  * model pill). Clicking it reads the current draft through the official
- * host.composer draft API, rewrites it into an AI-readable message (a goal line
- * plus one request per line) via a single stateless llm.oneshot call on the cheap auxiliary route
+ * host.composer draft API, rewrites it into a clearer version that keeps the
+ * original meaning via a single stateless llm.oneshot call on the cheap auxiliary route
  * (task: title_generation), and replaces the draft in place. The message is
  * never sent, no app markup is touched, and nothing outlives the plugin: the
  * only teardown state is the disposed guard below.
@@ -15,7 +15,7 @@ import { useState } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 
 const ID = 'hermes-make-plain'
-const VERSION = '0.2.0'
+const VERSION = '0.3.0'
 // Auxiliary routing key: lands on the configured auxiliary.title_generation
 // model (a cheap one), never the session's main model.
 const ONESHOT_TASK = 'title_generation'
@@ -23,17 +23,10 @@ const ONESHOT_TIMEOUT_MS = 60000
 const ONESHOT_MAX_TOKENS = 8192
 
 const INSTRUCTIONS = [
-  'You optimize a draft into a message an AI agent can execute without asking follow-up questions. Rewrite the text below into that form; return only the rewritten text.',
-  'Rules:',
-  "- Same language as the draft: Chinese stays Chinese, English stays English. Never translate.",
-  '- Preserve every concrete detail exactly as written: names, numbers, versions, ports, paths, file names, URLs, @-references, /commands, code and inline code. Never drop an item and never invent one.',
-  '- Lead with one short sentence that states the goal.',
-  '- Then give the details the agent needs, one item per line, each starting with "- ". Only items the draft actually contains.',
-  '- Make every request explicit and actionable: what to do, to what, and any constraint, preference, deadline or acceptance condition the draft states. Never invent requirements.',
-  '- Keep the decisions and context the draft gives; drop greetings, filler, hedging and repeated thoughts.',
-  '- Do not answer the draft, do not comment on it, do not add facts or suggestions.',
-  '- Plain text only: no markdown headings, no bold, no code fence around the whole answer.',
-  '- No preamble, no explanation, no surrounding quotes.'
+  'Rewrite the text below so it is easy to read. Keep the original meaning exactly: nothing added, nothing dropped. Return only the rewritten text.',
+  '- Same language as the draft. Never translate.',
+  '- Leave names, numbers, versions, ports, paths, file names, URLs, @-references, /commands and code exactly as written.',
+  '- Plain text: no headings, no code fence around the answer.'
 ].join('\n')
 
 // Unload guard: a rewrite already in flight must not touch the composer after
@@ -45,17 +38,17 @@ let inFlight = false
 
 const LOCALES = {
   en: {
-    tip: 'Rewrite this draft into an AI-ready request',
+    tip: 'Rewrite this draft so it reads clearly',
     working: 'Rewriting…',
     emptyDraft: 'The input box is empty. Write a draft first.',
-    done: 'Draft replaced with the AI-ready version.',
+    done: 'Draft replaced with the rewritten text.',
     emptyOutput: 'The model returned nothing; the draft is unchanged.',
     draftChanged: 'You edited the draft while it was rewriting, so your text was kept.',
     failed: 'Rewrite failed; the draft is unchanged.',
     replaceFailed: 'Rewritten, but writing it back to the input box failed.'
   },
   zh: {
-    tip: '把草稿整理成 AI 易读的要求',
+    tip: '把草稿优化得更易读',
     working: '正在优化…',
     emptyDraft: '输入框还是空的，先写点草稿。',
     done: '已替换为整理后的文字。',
