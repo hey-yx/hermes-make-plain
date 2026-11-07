@@ -15,7 +15,7 @@ import { useState } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 
 const ID = 'hermes-make-plain'
-const VERSION = '0.3.0'
+const VERSION = '0.3.1'
 // Auxiliary routing key: lands on the configured auxiliary.title_generation
 // model (a cheap one), never the session's main model.
 const ONESHOT_TASK = 'title_generation'
@@ -23,7 +23,8 @@ const ONESHOT_TIMEOUT_MS = 60000
 const ONESHOT_MAX_TOKENS = 8192
 
 const INSTRUCTIONS = [
-  'Rewrite the text below so it is easy to read. Keep the original meaning exactly: nothing added, nothing dropped. Return only the rewritten text.',
+  'Improve the wording of the text below so it is easier to read, and nothing else. Keep the original meaning exactly: nothing added, nothing dropped. Return only the rewritten text.',
+  '- Do not explain, interpret, comment on, answer, or add advice to the text. Only clean up how it is written.',
   '- Same language as the draft. Never translate.',
   '- Leave names, numbers, versions, ports, paths, file names, URLs, @-references, /commands and code exactly as written.',
   '- Plain text: no headings, no code fence around the answer.'

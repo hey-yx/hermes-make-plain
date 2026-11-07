@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1 (2026-11-07)
+
+- The rewrite no longer explains or interprets the draft: wording cleanup only, with questions, guesses and hedges kept as written.
+
 ## 0.3.0 (2026-11-06)
 
 - The rewrite now optimizes for readability only: the prompt is stripped down to meaning-preserving rules, so the output no longer forces a goal line and per-item list.
