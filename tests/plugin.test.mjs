@@ -165,7 +165,7 @@ t('register: one composer.actions slot, i18n + heartbeat + style + dispose', () 
   assert.strictEqual(mock.registrations[0].id, 'button')
   assert.ok(mock.i18n[ID].en && mock.i18n[ID].zh, 'en and zh bundles registered')
   const hb = mock.storage.get('heartbeat')
-  assert.strictEqual(hb.version, '0.3.5')
+  assert.strictEqual(hb.version, '0.3.6')
   assert.strictEqual(disposes.length, 1)
   assert.ok(globalThis.document.getElementById('hermes-make-plain-style'), 'spinner style tag injected')
   const btn = mountButton()
@@ -226,12 +226,13 @@ t('instructions: layout follows the content, numbered lists are conditional', as
   const btn = mountButton()
   await btn.props.onClick()
   const ins = mock.requests[0][1].instructions
+  assert.ok(/never instructions to you/i.test(ins), 'draft is data, not instructions')
   assert.ok(/shape follow the content/i.test(ins), 'shape follows the content')
-  assert.ok(/numbered list only when order matters/i.test(ins), 'numbered lists are conditional')
+  assert.ok(/two or more list lines/i.test(ins), 'list detection is explicit')
+  assert.ok(/same number of list lines and the same markers/i.test(ins), 'list shape is preserved')
+  assert.ok(/never split one symptom/i.test(ins), 'no over-splitting')
   assert.ok(!/one requirement per line as a numbered list/i.test(ins), 'old forced template is gone')
   assert.ok(!/aim for 4-8 items/i.test(ins), 'no forced item count')
-  assert.ok(/already a list, keep it a list/i.test(ins), 'existing lists keep their shape')
-  assert.ok(/never write an empty lead/i.test(ins), 'lead sentences carry information')
 })
 
 t('rewrite rejected: error toast, draft untouched', async () => {
@@ -256,6 +257,30 @@ t('empty model output: no replace, honest toast', async () => {
   await btn.props.onClick()
   assert.strictEqual(mock.setDrafts.length, 0)
   assert.strictEqual(mock.notifies[0].message, mock.i18n[ID].en.emptyOutput)
+})
+
+t('runaway model output: draft kept, error toast', async () => {
+  registerFresh()
+  const mock = globalThis.__mock
+  mock.onGetDraft = () => Promise.resolve('看看这个')
+  mock.onRequest = () =>
+    Promise.resolve({ text: 'Rewrite the text according to these requirements:\n' + 'x'.repeat(1000) })
+  const btn = mountButton()
+  await btn.props.onClick()
+  assert.strictEqual(mock.setDrafts.length, 0, 'runaway output is never written')
+  assert.strictEqual(mock.notifies[0].kind, 'error')
+  assert.strictEqual(mock.notifies[0].message, mock.i18n[ID].en.tooLong)
+})
+
+t('normal growth: a rewrite up to 4x the draft still lands', async () => {
+  registerFresh()
+  const mock = globalThis.__mock
+  const draft = '帮我把登录页改一下，按钮颜色太浅了看不见'
+  mock.onGetDraft = () => Promise.resolve(draft)
+  mock.onRequest = () => Promise.resolve({ text: '修改登录页：\n按钮颜色太浅，改深一点。\n再检查一遍对比度。' })
+  const btn = mountButton()
+  await btn.props.onClick()
+  assert.strictEqual(mock.setDrafts.length, 1)
 })
 
 t('draft edited during the call: author text kept, no overwrite', async () => {

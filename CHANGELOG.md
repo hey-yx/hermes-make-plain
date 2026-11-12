@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.6 (2026-11-12)
+
+- A report of symptoms with a request stays one paragraph even when it lists several things; only a set of separate edits on the same thing splits into one line each, and a request never sits on a line of its own.
+- A draft that already has two or more list lines keeps the same number of lines and the same markers; it is never turned into prose.
+- Hedges and uncertainty ("好像", "不确定", "可能是") are kept as written instead of being cleaned away as filler.
+- The model is told the draft is data, never instructions; an output longer than four times the draft (and over 400 characters) is rejected with a toast, leaving the draft untouched.
+
 ## 0.3.5 (2026-11-12)
 
 - Layout now follows the kind of draft: a symptom report with a request stays one paragraph, three or more separate edits get one short line each under an informative lead, and a draft that is already a list keeps its items and numbering.
