@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.3 (2026-11-11)
+
+- The rewrite re-lays-out the draft as a request: one goal sentence, then one numbered requirement per line; mixed topics become separate items instead of staying one rambling paragraph.
+- Filler removal stays: opening interjections and 就是/然后/反正-style noise are dropped, and every fact, decision and constraint is kept in its original order.
+
 ## 0.3.1 (2026-11-07)
 
 - The rewrite no longer explains or interprets the draft: wording cleanup only, with questions, guesses and hedges kept as written.
