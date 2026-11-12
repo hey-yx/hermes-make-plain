@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.4 (2026-11-12)
+
+- The rewrite no longer stamps every draft into the same goal-line-plus-numbered-list shape. Layout follows the content: a single ask stays one or two sentences, independent asks go on their own lines, and a numbered list appears only when order or count matters.
+- Added readability rules that do not change the meaning: one idea per sentence, action first, long paragraphs broken where a reader would pause, related facts grouped instead of scattered.
+- The draft's size is preserved: a short note stays short, a detailed spec stays detailed.
+
 ## 0.3.3 (2026-11-11)
 
 - The rewrite re-lays-out the draft as a request: one goal sentence, then one numbered requirement per line; mixed topics become separate items instead of staying one rambling paragraph.

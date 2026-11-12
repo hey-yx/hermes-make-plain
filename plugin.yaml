@@ -1,5 +1,5 @@
 name: hermes-make-plain
-version: "0.3.3"
+version: "0.3.4"
 description: "One-click composer polish for the Hermes Desktop chat: rewrites the draft in the input box into a clearer version that keeps the original meaning and replaces the draft in place, never sending anything. A single ghost button sits at the right side of the composer (composer.actions slot); clicking it runs one stateless auxiliary LLM call (llm.oneshot on the cheap title_generation route) and swaps the text through the official host.composer draft API, with empty-draft and failure toasts. Full en/zh locale bundles via ctx.i18n, load-evidence heartbeat in ctx.storage. No settings page, no app DOM access, no extra model requests."
 author: "hey-yx"
 kind: standalone

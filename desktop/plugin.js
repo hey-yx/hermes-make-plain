@@ -15,7 +15,7 @@ import { useState } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 
 const ID = 'hermes-make-plain'
-const VERSION = '0.3.3'
+const VERSION = '0.3.4'
 // Auxiliary routing key: lands on the configured auxiliary.title_generation
 // model (a cheap one), never the session's main model.
 const ONESHOT_TASK = 'title_generation'
@@ -23,13 +23,16 @@ const ONESHOT_TIMEOUT_MS = 60000
 const ONESHOT_MAX_TOKENS = 8192
 
 const INSTRUCTIONS = [
-  'Rewrite the text below into a request an AI can read and act on, and nothing else. Keep the original meaning exactly: add no facts and drop no facts. Return only the rewritten request.',
-  '- Re-lay it out: start with one goal sentence on its own line, then one requirement per line as a numbered list. Group related facts into single items, keep only decisions and requirements, and aim for 4-8 items; never keep the draft\'s rambling paragraph shape.',
-  '- Drop remarks about the conversation itself (\'as we discussed\', \'I thought about it again\') unless they decide something; the goal sentence says what to build, not what was chatted about.',
-  '- Remove pure filler and verbal noise: opening interjections (\'hey\', \'so\', \'喂\', \'我跟你说一下\'), filler words (\'就是\', \'然后\', \'反正\', \'那个\', \'你也知道\', \'大概\'), false starts and repeated restatements. Say each point once.',
+  'Rewrite the text below into a clear request an AI can read and act on, and nothing else. Keep the original meaning exactly: add no facts and drop no facts. Return only the rewritten request.',
+  '- Let the shape follow the content. A single ask stays one or two plain sentences. Independent asks go on their own lines, grouped by topic. Use a numbered list only when order matters (steps to run in sequence) or the count matters (a checklist of separate conditions); otherwise use plain lines or short paragraphs. Never apply a template the draft does not need, and never split one point into several items to look thorough.',
+  "- Match the draft's size: a two-line note stays about two lines, a detailed spec stays detailed. Do not inflate a note into a spec, or compress a spec into a summary.",
+  '- One idea per sentence, action first: write \'rewrite the header\', not \'the header should be rewritten\'. Replace nominalizations and stacked modifiers with the plain verb. Break a long paragraph where a reader would pause.',
+  '- Group related facts into the same item; use the fewest items that still read cleanly.',
+  "- Drop remarks about the conversation itself ('as we discussed', 'I thought about it again') unless they decide something.",
+  "- Remove pure filler and verbal noise: opening interjections ('hey', 'so', '喂', '我跟你说一下'), filler words ('就是', '然后', '反正', '那个', '你也知道', '大概'), false starts and repeated restatements. Say each point once.",
   '- Keep every fact, decision, name, number, date, version, port, path, file name, URL, @-reference, /command, code and constraint exactly as written, in the order it appears. Do not resolve an ambiguity, answer the request, or add advice.',
   '- Same language as the draft. Never translate.',
-  '- Plain text: no headings above the goal, no code fence around the answer, no preamble or explanation.'
+  '- Plain text: no headings, no bold, no code fence around the answer, no preamble or explanation. Backticks only around actual code, commands or paths.'
 ].join('\n')
 
 // Unload guard: a rewrite already in flight must not touch the composer after

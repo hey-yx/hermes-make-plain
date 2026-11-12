@@ -165,7 +165,7 @@ t('register: one composer.actions slot, i18n + heartbeat + style + dispose', () 
   assert.strictEqual(mock.registrations[0].id, 'button')
   assert.ok(mock.i18n[ID].en && mock.i18n[ID].zh, 'en and zh bundles registered')
   const hb = mock.storage.get('heartbeat')
-  assert.strictEqual(hb.version, '0.3.3')
+  assert.strictEqual(hb.version, '0.3.4')
   assert.strictEqual(disposes.length, 1)
   assert.ok(globalThis.document.getElementById('hermes-make-plain-style'), 'spinner style tag injected')
   const btn = mountButton()
@@ -216,6 +216,20 @@ t('rewrite: one oneshot call, fences stripped, draft replaced', async () => {
   assert.deepStrictEqual(mock.setDrafts[0], { sid: 'sess-1', text: '优化后的文字。' })
   assert.strictEqual(mock.notifies[0].kind, 'info')
   assert.strictEqual(mock.notifies[0].message, mock.i18n[ID].en.done)
+})
+
+t('instructions: layout follows the content, numbered lists are conditional', async () => {
+  registerFresh()
+  const mock = globalThis.__mock
+  mock.onGetDraft = () => Promise.resolve('draft text')
+  mock.onRequest = () => Promise.resolve({ text: 'rewritten' })
+  const btn = mountButton()
+  await btn.props.onClick()
+  const ins = mock.requests[0][1].instructions
+  assert.ok(/shape follow the content/i.test(ins), 'shape follows the content')
+  assert.ok(/numbered list only when order matters/i.test(ins), 'numbered lists are conditional')
+  assert.ok(!/one requirement per line as a numbered list/i.test(ins), 'old forced template is gone')
+  assert.ok(!/aim for 4-8 items/i.test(ins), 'no forced item count')
 })
 
 t('rewrite rejected: error toast, draft untouched', async () => {
