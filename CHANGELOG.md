@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.5 (2026-11-12)
+
+- Layout now follows the kind of draft: a symptom report with a request stays one paragraph, three or more separate edits get one short line each under an informative lead, and a draft that is already a list keeps its items and numbering.
+- A shared subject is named once; each line starts with the verb instead of repeating a "needs to be changed" frame.
+- `@`-references and `/`-commands are no longer wrapped in backticks; only real code, commands and paths are.
+
 ## 0.3.4 (2026-11-12)
 
 - The rewrite no longer stamps every draft into the same goal-line-plus-numbered-list shape. Layout follows the content: a single ask stays one or two sentences, independent asks go on their own lines, and a numbered list appears only when order or count matters.

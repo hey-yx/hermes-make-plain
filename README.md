@@ -19,6 +19,7 @@
 - Click it to replace your rough draft in place with a clean rewrite that reads clearly. The message is not sent; the chat stays untouched.
 - The rewrite keeps your original meaning, stays in the language you wrote in, and keeps every concrete detail exactly as written: names, numbers, versions, ports, paths, file names, URLs, `@`-references, `/`-commands and code.
 - You can see what it is doing: the button spins while the rewrite is in flight, and an empty box is rejected before any work starts.
+- Layout follows the draft: a short ask stays one or two sentences, a bug report stays one paragraph, separate edits get one line each, and an existing list keeps its numbering.
 
 ## How it works
 

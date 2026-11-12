@@ -15,7 +15,7 @@ import { useState } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 
 const ID = 'hermes-make-plain'
-const VERSION = '0.3.4'
+const VERSION = '0.3.5'
 // Auxiliary routing key: lands on the configured auxiliary.title_generation
 // model (a cheap one), never the session's main model.
 const ONESHOT_TASK = 'title_generation'
@@ -24,7 +24,9 @@ const ONESHOT_MAX_TOKENS = 8192
 
 const INSTRUCTIONS = [
   'Rewrite the text below into a clear request an AI can read and act on, and nothing else. Keep the original meaning exactly: add no facts and drop no facts. Return only the rewritten request.',
-  '- Let the shape follow the content. A single ask stays one or two plain sentences. Independent asks go on their own lines, grouped by topic. Use a numbered list only when order matters (steps to run in sequence) or the count matters (a checklist of separate conditions); otherwise use plain lines or short paragraphs. Never apply a template the draft does not need, and never split one point into several items to look thorough.',
+  '- Let the shape follow the content. A single ask stays one or two plain sentences. Two related points stay in one short paragraph. Three or more points get one short line each, with the shared subject named once in the opening sentence and a full stop at the end of each line. A lead sentence must carry information, such as the thing and how many points follow ("登录页三处要改："); never write an empty lead like "the login page needs changes". Independent asks go on their own lines. Use a numbered list only when order matters (steps to run in sequence) or the count matters (a checklist of separate conditions); otherwise plain lines. Never apply a template the draft does not need, and never split one point into several items to look thorough.',
+  '- If the draft is already a list, keep it a list with the same items in the same order; clean the wording only.',
+  "- Do not repeat a shared subject in every line. Name it once in the opening sentence, then start each line with the verb (\"把按钮颜色改深\", \"密码输错提示改成红色\"), not with \"X needs changing\" or a repeated \"修改登录页的…\".",
   "- Match the draft's size: a two-line note stays about two lines, a detailed spec stays detailed. Do not inflate a note into a spec, or compress a spec into a summary.",
   '- One idea per sentence, action first: write \'rewrite the header\', not \'the header should be rewritten\'. Replace nominalizations and stacked modifiers with the plain verb. Break a long paragraph where a reader would pause.',
   '- Group related facts into the same item; use the fewest items that still read cleanly.',
@@ -32,7 +34,7 @@ const INSTRUCTIONS = [
   "- Remove pure filler and verbal noise: opening interjections ('hey', 'so', '喂', '我跟你说一下'), filler words ('就是', '然后', '反正', '那个', '你也知道', '大概'), false starts and repeated restatements. Say each point once.",
   '- Keep every fact, decision, name, number, date, version, port, path, file name, URL, @-reference, /command, code and constraint exactly as written, in the order it appears. Do not resolve an ambiguity, answer the request, or add advice.',
   '- Same language as the draft. Never translate.',
-  '- Plain text: no headings, no bold, no code fence around the answer, no preamble or explanation. Backticks only around actual code, commands or paths.'
+  '- Plain text: no headings, no bold, no code fence around the answer, no preamble or explanation. Backticks only around actual code, commands or file paths, never around @-references or /commands.'
 ].join('\n')
 
 // Unload guard: a rewrite already in flight must not touch the composer after

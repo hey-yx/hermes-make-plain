@@ -165,7 +165,7 @@ t('register: one composer.actions slot, i18n + heartbeat + style + dispose', () 
   assert.strictEqual(mock.registrations[0].id, 'button')
   assert.ok(mock.i18n[ID].en && mock.i18n[ID].zh, 'en and zh bundles registered')
   const hb = mock.storage.get('heartbeat')
-  assert.strictEqual(hb.version, '0.3.4')
+  assert.strictEqual(hb.version, '0.3.5')
   assert.strictEqual(disposes.length, 1)
   assert.ok(globalThis.document.getElementById('hermes-make-plain-style'), 'spinner style tag injected')
   const btn = mountButton()
@@ -230,6 +230,8 @@ t('instructions: layout follows the content, numbered lists are conditional', as
   assert.ok(/numbered list only when order matters/i.test(ins), 'numbered lists are conditional')
   assert.ok(!/one requirement per line as a numbered list/i.test(ins), 'old forced template is gone')
   assert.ok(!/aim for 4-8 items/i.test(ins), 'no forced item count')
+  assert.ok(/already a list, keep it a list/i.test(ins), 'existing lists keep their shape')
+  assert.ok(/never write an empty lead/i.test(ins), 'lead sentences carry information')
 })
 
 t('rewrite rejected: error toast, draft untouched', async () => {
